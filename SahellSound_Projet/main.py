@@ -1,4 +1,6 @@
+# Importation de label et analyse 
 import label
+import analyse 
 
 def afficher_menu():
     print("\n=== SAHELSOUND RECORDS ===")
@@ -10,7 +12,7 @@ def afficher_menu():
 
 def main():
     # On charge les données au démarrage
-    catalogue = label.charger_catalogue()
+    ucatalogue = label.charger_catalogue("catalogue.json")
     
     while True:
         afficher_menu()
@@ -57,6 +59,7 @@ def main():
             
             # 3. Appel au moteur (label.py) pour valider et enregistrer
             if label.ajouter_artiste(catalogue, nouvel_artiste):
+                label.sauvegarder_catalogue(catalogue, "catalogue.json")
                 print(f"L'artiste {nom} a été ajouté avec succès !")
             else:
                 print("L'ajout a échoué (vérifiez si l'ID existe déjà).")
@@ -84,14 +87,14 @@ def main():
             
             # 4. On demande au moteur de faire la liaison
             if label.ajouter_album(catalogue, id_cible, nouvel_album):
+                label.sauvegarder_catalogue(catalogue, "catalogue.json")
                 print(f"L'album '{titre}' a été ajouté au catalogue !")
             else:
                 print("Artiste introuvable. Vérifiez l'ID.")
 
         elif choix == "4":
             print("\n--- ANALYSE ET STATISTIQUES ---")
-            # On importe analyse ici ou en haut du fichier
-            import analyse 
+            
             
             # On transforme notre catalogue en "DataFrame" (Tableau Pandas)
             df = analyse.creer_dataframe(catalogue)
