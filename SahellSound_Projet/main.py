@@ -12,7 +12,7 @@ def afficher_menu():
 
 def main():
     # On charge les données au démarrage
-    ucatalogue = label.charger_catalogue("catalogue.json")
+    catalogue = label.charger_catalogue("catalogue.json")
     
     while True:
         afficher_menu()
